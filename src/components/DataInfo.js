@@ -1,6 +1,6 @@
 // DataInfo.js - Component to display information about the data source
 import React, { useState, useEffect } from 'react';
-import { Info, Database, Clock, MapPin } from 'lucide-react';
+import { Database, Clock, MapPin } from 'lucide-react';
 import weeklyDataService from '../services/weeklyDataService';
 
 const DataInfo = () => {

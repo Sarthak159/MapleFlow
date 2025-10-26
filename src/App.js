@@ -6,6 +6,7 @@ import FindMyStop from './components/FindMyStop';
 import Analytics from './components/Analytics';
 import Feedback from './components/Feedback';
 import Sidebar from './components/Sidebar';
+import AnimatedPage from './components/AnimatedPage';
 import { BusProvider } from './context/BusContext';
 import { NotificationProvider } from './context/NotificationContext';
 import './App.css';
@@ -18,12 +19,14 @@ function App() {
           <div className="app-buckeyeride">
             <Sidebar />
             <main className="main-content-buckeyeride">
-              <Routes>
-                <Route path="/" element={<Dashboard />} />
-                <Route path="/stops" element={<FindMyStop />} />
-                <Route path="/analytics" element={<Analytics />} />
-                <Route path="/feedback" element={<Feedback />} />
-              </Routes>
+              <AnimatedPage>
+                <Routes>
+                  <Route path="/" element={<Dashboard />} />
+                  <Route path="/stops" element={<FindMyStop />} />
+                  <Route path="/analytics" element={<Analytics />} />
+                  <Route path="/feedback" element={<Feedback />} />
+                </Routes>
+              </AnimatedPage>
             </main>
             <Toaster 
               position="top-right"
