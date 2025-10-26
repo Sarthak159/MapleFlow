@@ -1,0 +1,242 @@
+// Settings.js
+import React, { useState } from "react";
+import { Bell, MapPin, Moon, Sun, Wifi, Volume2, VolumeX } from "lucide-react";
+
+const Settings = () => {
+  const [settings, setSettings] = useState({
+    notifications: {
+      crowdAlerts: true,
+      delayAlerts: true,
+      ecoModeUpdates: true,
+      comfortAlerts: false,
+    },
+    preferences: {
+      darkMode: false,
+      autoRefresh: true,
+      refreshInterval: 30,
+      soundEnabled: true,
+      vibrationEnabled: true,
+    },
+    location: {
+      trackingEnabled: true,
+      shareLocation: false,
+      nearbyStops: true,
+    },
+  });
+
+  const handleToggle = (category, setting) => {
+    setSettings((prev) => ({
+      ...prev,
+      [category]: {
+        ...prev[category],
+        [setting]: !prev[category][setting],
+      },
+    }));
+  };
+
+  const handleSliderChange = (category, setting, value) => {
+    setSettings((prev) => ({
+      ...prev,
+      [category]: {
+        ...prev[category],
+        [setting]: parseInt(value),
+      },
+    }));
+  };
+
+  const SettingToggle = ({ label, description, checked, onChange }) => (
+    <div className="setting-item">
+      <div className="setting-info">
+        <div className="setting-label">{label}</div>
+        <div className="setting-description">{description}</div>
+      </div>
+      <label className="toggle-switch">
+        <input type="checkbox" checked={checked} onChange={onChange} />
+        <span className="toggle-slider"></span>
+      </label>
+    </div>
+  );
+
+  const SettingSlider = ({
+    label,
+    description,
+    value,
+    min,
+    max,
+    onChange,
+    unit,
+  }) => (
+    <div className="setting-item">
+      <div className="setting-info">
+        <div className="setting-label">{label}</div>
+        <div className="setting-description">{description}</div>
+      </div>
+      <div className="setting-control">
+        <input
+          type="range"
+          min={min}
+          max={max}
+          value={value}
+          onChange={(e) => onChange(parseInt(e.target.value))}
+          className="setting-slider"
+        />
+        <span className="setting-value">
+          {value}
+          {unit}
+        </span>
+      </div>
+    </div>
+  );
+
+  return (
+    <div className="settings-page">
+      <div className="settings-header">
+        <h1>⚙️ Settings</h1>
+        <p>Customize your Maple Flow experience</p>
+      </div>
+
+      <div className="settings-sections">
+        {/* Notifications */}
+        <div className="settings-section">
+          <div className="section-header">
+            <Bell size={24} />
+            <h2>Notifications</h2>
+          </div>
+
+          <SettingToggle
+            label="Crowd Level Alerts"
+            description="Get notified when buses become less crowded"
+            checked={settings.notifications.crowdAlerts}
+            onChange={() => handleToggle("notifications", "crowdAlerts")}
+          />
+
+          <SettingToggle
+            label="Delay Alerts"
+            description="Receive notifications about route delays"
+            checked={settings.notifications.delayAlerts}
+            onChange={() => handleToggle("notifications", "delayAlerts")}
+          />
+
+          <SettingToggle
+            label="Eco Mode Updates"
+            description="Learn about environmental impact savings"
+            checked={settings.notifications.ecoModeUpdates}
+            onChange={() => handleToggle("notifications", "ecoModeUpdates")}
+          />
+
+          <SettingToggle
+            label="Comfort Alerts"
+            description="Notifications about temperature and ride quality"
+            checked={settings.notifications.comfortAlerts}
+            onChange={() => handleToggle("notifications", "comfortAlerts")}
+          />
+        </div>
+
+        {/* Preferences */}
+        <div className="settings-section">
+          <div className="section-header">
+            <Moon size={24} />
+            <h2>Preferences</h2>
+          </div>
+
+          <SettingToggle
+            label="Dark Mode"
+            description="Switch to dark theme for better visibility"
+            checked={settings.preferences.darkMode}
+            onChange={() => handleToggle("preferences", "darkMode")}
+          />
+
+          <SettingToggle
+            label="Auto Refresh"
+            description="Automatically update bus information"
+            checked={settings.preferences.autoRefresh}
+            onChange={() => handleToggle("preferences", "autoRefresh")}
+          />
+
+          {settings.preferences.autoRefresh && (
+            <SettingSlider
+              label="Refresh Interval"
+              description="How often to update bus data"
+              value={settings.preferences.refreshInterval}
+              min={10}
+              max={120}
+              onChange={(value) =>
+                handleSliderChange("preferences", "refreshInterval", value)
+              }
+              unit="s"
+            />
+          )}
+
+          <SettingToggle
+            label="Sound Notifications"
+            description="Play sounds for important alerts"
+            checked={settings.preferences.soundEnabled}
+            onChange={() => handleToggle("preferences", "soundEnabled")}
+          />
+
+          <SettingToggle
+            label="Vibration"
+            description="Vibrate for notifications"
+            checked={settings.preferences.vibrationEnabled}
+            onChange={() => handleToggle("preferences", "vibrationEnabled")}
+          />
+        </div>
+
+        {/* Location */}
+        <div className="settings-section">
+          <div className="section-header">
+            <MapPin size={24} />
+            <h2>Location & Privacy</h2>
+          </div>
+
+          <SettingToggle
+            label="Location Tracking"
+            description="Allow app to track your location for better recommendations"
+            checked={settings.location.trackingEnabled}
+            onChange={() => handleToggle("location", "trackingEnabled")}
+          />
+
+          <SettingToggle
+            label="Share Location Data"
+            description="Help improve crowd level estimates (anonymous)"
+            checked={settings.location.shareLocation}
+            onChange={() => handleToggle("location", "shareLocation")}
+          />
+
+          <SettingToggle
+            label="Nearby Stops"
+            description="Show bus stops near your current location"
+            checked={settings.location.nearbyStops}
+            onChange={() => handleToggle("location", "nearbyStops")}
+          />
+        </div>
+
+        {/* About */}
+        <div className="settings-section">
+          <div className="section-header">
+            <h2>About Maple Flow</h2>
+          </div>
+
+          <div className="about-info">
+            <div className="about-item">
+              <strong>Version:</strong> 1.0.0
+            </div>
+            <div className="about-item">
+              <strong>Last Updated:</strong> March 2024
+            </div>
+            <div className="about-item">
+              <strong>Privacy Policy:</strong> Your data is encrypted and never
+              shared
+            </div>
+          </div>
+
+          <button className="export-data-btn">Export My Data</button>
+
+          <button className="reset-settings-btn">Reset to Defaults</button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Settings;

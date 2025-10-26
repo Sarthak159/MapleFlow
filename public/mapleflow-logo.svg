@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 280">
+  <!-- Main red location pin -->
+  <path d="M 100,20 
+           C 58,20 25,53 25,95 
+           C 25,137 100,260 100,260 
+           C 100,260 175,137 175,95 
+           C 175,53 142,20 100,20 Z" 
+        fill="#FF0000"/>
+  
+  <!-- White center circle -->
+  <circle cx="100" cy="95" r="48" fill="#FFFFFF"/>
+  
+  <!-- Red Canadian maple leaf -->
+  <g transform="translate(100, 95)">
+    <path d="M 0,-28
+             L -3,-16
+             L -13,-20
+             L -10,-11
+             L -20,-9
+             L -12,-5
+             L -15,6
+             L -9,3
+             L -10,16
+             L -6,9
+             L -9,24
+             L 0,14
+             L 9,24
+             L 6,9
+             L 10,16
+             L 9,3
+             L 15,6
+             L 12,-5
+             L 20,-9
+             L 10,-11
+             L 13,-20
+             L 3,-16
+             Z" 
+          fill="#FF0000"/>
+  </g>
+</svg>
+
