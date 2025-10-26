@@ -72,7 +72,7 @@ const Dashboard = () => {
       <div className="dashboard-top-header">
         <div className="header-content">
           <h1 className="dashboard-title">Live Transit Comfort</h1>
-          <p className="dashboard-subtitle">Live bus predictions using current day/time, independent of CSV day column</p>
+          <p className="dashboard-subtitle">Real-Time bus tracking with crowd intelligence</p>
         </div>
         <div className="header-right">
           <div className="live-time-display">
